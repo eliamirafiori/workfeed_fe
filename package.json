@@ -1,26 +1,19 @@
 {
-  "name": "workfeed",
+  "name": "auth",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "http-proxy-middleware": "^3.0.5",
-    "next": "15.3.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "workfeed": "file:"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.2",
-    "tailwindcss": "^4"
+    "@lucia-auth/adapter-sqlite": "^3.0.2",
+    "better-sqlite3": "^9.4.3",
+    "lucia": "^3.2.2",
+    "next": "14.1.4",
+    "react": "^18",
+    "react-dom": "^18"
   }
 }

@@ -1,5 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  /*
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_API_URL}api/:path*`, // Proxy to Backend
+      },
+      {
+        source: "/data/:path*",
+        destination: `${process.env.NEXT_PUBLIC_MEDIA_URL}data/:path*`,
+      },
+    ];
+  },
   async headers() {
     return [
       {
@@ -29,6 +42,7 @@ const nextConfig = {
       },
     ];
   },
+  */
 };
 
 export default nextConfig;
