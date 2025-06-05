@@ -1,19 +1,23 @@
-import { verifyAuth } from "@/lib/auth";
-import { getTrainings } from "@/lib/training";
 import { redirect } from "next/navigation";
 
-export default async function TrainingPage() {
+import { verifyAuth } from "@/lib/auth";
+import { getTrainings } from "@/lib/training";
+import { getJobs } from "@/lib/jobs";
+
+export default async function JobsPage() {
   const result = await verifyAuth();
 
   if (!result.user) {
     return redirect("/");
   }
 
+  const health = await getJobs();
+
   const trainingSessions = getTrainings();
 
   return (
     <main>
-      <h1>Find your favorite activity</h1>
+      <h1>Find your favorite job</h1>
       <ul id="training-sessions">
         {trainingSessions.map((training) => (
           <li key={training.id}>

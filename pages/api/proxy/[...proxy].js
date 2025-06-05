@@ -9,6 +9,7 @@ export const config = {
 
 const proxy = createProxyMiddleware({
   target: "https://work-feed-be.onrender.com",
+  // target: `${process.env.NEXT_PUBLIC_API_URL}`,
   changeOrigin: true,
   pathRewrite: {
     "^/api/proxy": "", // remove base path

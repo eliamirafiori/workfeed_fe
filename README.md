@@ -74,6 +74,28 @@ node --version && npm --version
 which node && which npm
 ```
 
+### Create a Python virtual environment
+
+```bash
+conda create -y -n env_name python
+```
+
+To specify a python version, you can run:
+
+```bash
+conda create -y -n env_name python=version
+```
+
+Then, check the following installations:
+
+```bash
+python --version && pip --version
+```
+
+```bash
+which python && which pip
+```
+
 ### Create an environment from YAML
 
 ```bash
@@ -106,6 +128,10 @@ conda remove --name env_name --all
 conda create --name clone_env_name --clone env_name
 ```
 
+## Docker
+
+TODO
+
 ## NextJS
 
 ### Install the required packages
@@ -132,5 +158,16 @@ npm run build
 npm run tart
 ```
 
-## Docker
+### .env\* files
 
+NextJS recognizes the environment automatically, based on the command given.
+
+1. `.env`: This is the default file that Next.js will use in all environments unless explicitly overridden. It can contain general environment variables that will be available in both development and production.
+
+2. `.env.local`: This file is used for environment-specific variables that should not be committed to version control. It's typically used to store sensitive data, like API keys or database URLs, that should not be pushed to the repository. The variables in .env.local will take precedence over those in `.env`.
+
+3. `.env.development`: This file is used specifically in development mode. If you run next dev, Next.js will automatically load the variables from .env.development, if they are present.
+
+4. `.env.production`: This file is used for production-specific environment variables, and Next.js will load it when running the production build (next start).
+
+5. `.env.test`: This file is used for environment variables specific to running tests (with Jest, for example).
