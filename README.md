@@ -171,3 +171,23 @@ NextJS recognizes the environment automatically, based on the command given.
 4. `.env.production`: This file is used for production-specific environment variables, and Next.js will load it when running the production build (next start).
 
 5. `.env.test`: This file is used for environment variables specific to running tests (with Jest, for example).
+
+### Authentication [GUIDE](https://nextjs.org/docs/app/guides/authentication#session-management)
+
+### React Context Providers
+
+#### ContextAPI
+
+Video Name: Full Stack Spotify Clone： Next 13.4, React, Stripe, Supabase, PostgreSQL, Tailwind (2023)
+
+1:34:45 - useUser hook with ContextAPI
+1:45:00 - useContext
+
+#### React State Management - [Redux](https://redux.js.org/usage/nextjs)
+
+[Redux Fundamentals](https://redux.js.org/tutorials/fundamentals/part-1-overview)
+
+#### React State Management - [Zustand](https://zustand.docs.pmnd.rs/guides/nextjs)
+
+2:02:00 - Using Zustand
+4:03:00 - Music Player

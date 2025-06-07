@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 
-import { verifyAuth, verifySession } from "@/lib/auth";
+import { verifyAuth } from "@/lib/auth";
 import { getTrainings } from "@/lib/training";
 import { getHealth } from "@/lib/health";
 
-export default async function JobsPage() {
-  const result = await verifySession();
+export default async function SetupPage() {
+  const result = await verifyAuth();
 
   if (!result.user) {
     return redirect("/");
@@ -17,7 +17,7 @@ export default async function JobsPage() {
 
   return (
     <main>
-      <h1>Find your favorite job {result.user}</h1>
+      <h1>Find your favorite job</h1>
       <ul id="training-sessions">
         {trainingSessions.map((training) => (
           <li key={training.id}>

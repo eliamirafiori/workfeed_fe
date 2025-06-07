@@ -1,13 +1,17 @@
 "use server";
 
-import { createAuthSession, destroySession } from "@/lib/auth";
+import { createAuthSession, createSession, deleteSession, destroySession } from "@/lib/auth";
 import { hashUserPassword, verifyPassword } from "@/lib/hash";
-import { createUser, getUserByEmail } from "@/lib/user";
+import { createUser, getMe, loginUser } from "@/lib/user";
 import { redirect } from "next/navigation";
 
 export async function signup(prevState, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
+  const location = formData.get("location");
+  const job_title = formData.get("job_title");
+  const experience_level = formData.get("experience_level");
+  const minimum_salary = parseInt(formData.get("minimum_salary"));
 
   let errors = {};
 
@@ -23,22 +27,19 @@ export async function signup(prevState, formData) {
     return { errors: errors };
   }
 
-  // store in the database (create a new user)
-  const hashedPassword = hashUserPassword(password);
-  try {
-    const userId = createUser(email, hashedPassword);
-    createAuthSession(userId);
+  const preferences = {
+    location,
+    job_title,
+    experience_level,
+    minimum_salary,
+  };
 
-    redirect("/training");
+  try {
+    await createUser(email, password, preferences);
   } catch (error) {
-    if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
-      return {
-        errors: {
-          email: "It seems like an account for the chosen email already exists",
-        },
-      };
-    }
-    throw error;
+    return {
+      errors: "It seems like we got some problems back here.",
+    };
   }
 }
 
@@ -46,27 +47,18 @@ export async function login(prevState, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const existingUser = getUserByEmail(email);
-
-  if (!existingUser) {
+  try {
+    var token = await loginUser(email, password);
+  } catch (error) {
     return {
-      errors: {
-        email: "Could not authenticate user, please check your credentials.",
-      },
+      errors: "It seems like we got some problems back here.",
     };
   }
 
-  const isValidPasswrod = verifyPassword(existingUser.password, password);
+  console.log("TES TEST TEST");
+  console.log(token);
 
-  if (!isValidPasswrod) {
-    return {
-      errors: {
-        password: "Could not authenticate user, please check your credentials.",
-      },
-    };
-  }
-
-  await createAuthSession(existingUser.id);
+  await createSession(token);
   redirect("/training");
 }
 
@@ -79,6 +71,6 @@ export async function auth(mode, prevState, formData) {
 }
 
 export async function logout() {
-  await destroySession();
+  await deleteSession();
   redirect("/");
 }
