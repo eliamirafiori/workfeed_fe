@@ -130,7 +130,13 @@ conda create --name clone_env_name --clone env_name
 
 ## Docker
 
-TODO
+```bash
+sudo docker build -t workfeed .
+```
+
+```bash
+sudo docker run -p 3000:3000 workfeed
+```
 
 ## NextJS
 
